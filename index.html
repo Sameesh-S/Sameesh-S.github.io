@@ -4,54 +4,73 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <script src="jquery-1.12.0.min.js"></script>
 	    <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="myjs/top.js">
 	    <script src="js/bootstrap.min.js"></script>
     <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!----script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
     <!--script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script-->
+
+        <script>
+            function github(){
+                $('#resume').hide();
+                $('#contact').hide();
+                $('#github').show();
+            }
+        </script>
+
+        <script>
+            function resume(){
+                $('#github').hide();
+                $('#contact').hide();
+                $('#resume').show();
+            }
+        </script>
+
+        <script>
+            function contact(){
+                $('#resume').hide();
+                $('#github').hide();
+                $('#contact').show();
+            }
+        </script>
+
+
 </head>
 <body>
-
-<body>
-	<header id="header"><!--header-->
-		<div class="header_top"><!--header_top-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<li><a href=""><i class="glyphicon glyphicon-earphone"></i> +91  8281870996</a></li>
-								<li><a href=""><i class="glyphicon glyphicon-envelope"></i> sameesh096@gmail.com</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="social-icons pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-facebook"></i></a></li>
-								<li><a href=""><i class="fa fa-twitter"></i></a></li>
-								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header_top-->
-		
-	</header><!--/header-->
-	<div id="Pro"><!--profile pic-->
-		<div class="container">
-			<div class="row"style="border:thin solid lightblue">
-				<div class="col-sm-4" style="background-color:lightblue" >
-					<img class="img-circle img-responsives" width="100%" src="profile.jpg">
-				</div>
-				<div class="col-sm-8">
-					<h1>SAMEESH.S</h1>
-					<p>a self driven tech enthusiasts who loves to programme</p>
-				</div>
-			</div>
-		</div>
-	</div><!--profile pic-->
+<!--navbar-->
+<nav class="navbar navbar-default navbar-fixed-top white" role="navigation">
+    <div class="container" >
+        <div class="navbar-header col-sm-7">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      		<a class="navbar-brand" href="#"><span class="navbar-logo">Sameesh S</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        	<ul id="men" class="nav navbar-nav">
+				<li><a id="GithubProjects" href="#GithubProjects" onClick="github();" title="here">Github Projects</a></li>
+				<li><a id="Resume" title="here" href="#Resume" onClick="resume();">Resume</a></li>
+				<li><a id="Contact" title="here" href="#Contact" onClick="contact();">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>  
+<!--navbar ends-->   
+<!--main content--> 
+<div  class="container">
+    <div id="resume">
+    Resume
+    </div>
+    <div id="github">
+    github
+    </div>
+    <div id="contact">
+    contact
+    </div>
+</div>
+<!--main content ending-->
 </body>
 </html>
