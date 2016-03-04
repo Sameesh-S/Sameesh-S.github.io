@@ -4,37 +4,12 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <script src="jquery-1.12.0.min.js"></script>
 	    <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="myjs/top.js">
+        <link rel="stylesheet" href="mycss/screen.css">
 	    <script src="js/bootstrap.min.js"></script>
+        <script src="myjs/my.js"></script>
     <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
     <!--script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script-->
-
-        <script>
-            function github(){
-                $('#resume').hide();
-                $('#contact').hide();
-                $('#github').show();
-            }
-        </script>
-
-        <script>
-            function resume(){
-                $('#github').hide();
-                $('#contact').hide();
-                $('#resume').show();
-            }
-        </script>
-
-        <script>
-            function contact(){
-                $('#resume').hide();
-                $('#github').hide();
-                $('#contact').show();
-            }
-        </script>
-
-
 </head>
 <body>
 <!--navbar-->
@@ -61,15 +36,7 @@
 <!--navbar ends-->   
 <!--main content--> 
 <div  class="container">
-    <div id="resume">
-    Resume
-    </div>
-    <div id="github">
-    github
-    </div>
-    <div id="contact">
-    contact
-    </div>
+    <div id ='content'></div>
 </div>
 <!--main content ending-->
 </body>
