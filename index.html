@@ -1,10 +1,11 @@
 <html>
 <head>
-	    <meta charset="utf-8"> 
+	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <script src="jquery-1.12.0.min.js"></script>
 	    <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="mycss/screen.css">
+      <link rel="stylesheet" href="mycss/screen.css">
+			<link rel="stylesheet" href="css/font-awesome.min.css">
 	    <script src="js/bootstrap.min.js"></script>
         <script src="myjs/my.js"></script>
     <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -12,32 +13,100 @@
     <!--script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script-->
 </head>
 <body>
-<!--navbar-->
-<nav class="navbar navbar-default navbar-fixed-top white" role="navigation">
-    <div class="container" >
-        <div class="navbar-header col-sm-7">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-      		<a class="navbar-brand" href="#"><span class="navbar-logo">Sameesh S</span></a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-        	<ul id="men" class="nav navbar-nav">
-				<li><a id="GithubProjects" href="#GithubProjects" onClick="github();" title="here">Github Projects</a></li>
-				<li><a id="Resume" title="here" href="#Resume" onClick="resume();">Resume</a></li>
-				<li><a id="Contact" title="here" href="#Contact" onClick="contact();">Contact</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>  
-<!--navbar ends-->   
-<!--main content--> 
-<div  class="container">
-    <div id ='content'></div>
+
+
+<!--static navbar-->
+<nav class="navbar navbar-default navbar-inner navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Project name</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li role="separator" class="divider"></li>
+						<li class="dropdown-header">Nav header</li>
+						<li><a href="#">Separated link</a></li>
+						<li><a href="#">One more separated link</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+				<li><a href="../navbar-static-top/">Static top</a></li>
+				<li><a href="../navbar-fixed-top/">Fixed top</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div><!--/.container-fluid -->
+</nav>
+<!--end static navbar-->
+
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<image src="images/glassphone.jpg">
+			</div>
+			</div>
+	</div>
+
+
+	<div class="container">
+	<div class="row">
+		<div id="first" class="col-md-3 box">
+			<div>
+				hai
+			</div>
+		</div>
+		<div id="second" class="col-md-4 box">
+			hello
+			jsl
+			sjdlf
+			lsjdkjsdhfksj
+			kjjshdfksdf
+			sjdfskfh
+			skfdhkshfd
+			ksjfksdhf
+			ksfhkshdf
+			sdfhsdkfh
+			sdkfhskdh
+			kshdfjks
+		</div>
+		<div id="third" class="col-md-4 box">
+			world
+		</div>
+	</div>
+	</div>
 </div>
-<!--main content ending-->
+<br><br><br><br>
+
+<footer>
+	<div class="container">
+			<div class="social col-xs-6">
+				<a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
+				<a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
+			</div>
+			<div class="branding col-xs-6">
+				Universal Mobiles .2017
+			</div>
+	</div>
+</footer>
+
+
 </body>
 </html>
