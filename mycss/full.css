@@ -1,0 +1,38 @@
+body {
+  background-color: #45180a;
+}
+
+.promo video {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -10;
+}
+.promo img {
+  width: 160px;
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  margin-left: -80px;
+}
+
+
+.box {
+  margin: 15px;
+  height: 300px;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  opacity: 0.6;
+  transition: .2s;
+  background-color: rgba(85, 142, 140, 0.3);
+}
+
+.box:hover {
+  background-color: rgba(255, 142, 80, 0.9);
+}
