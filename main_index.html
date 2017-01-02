@@ -25,15 +25,37 @@
     }
     .leftupper {
       height: 235px;
+			overflow: hidden;
     }
+		.leftupper:hover .rolcaption {
+			-webkit-transform: translateY(-72px);
+		}
     .leftbelow {
       margin-top: 25px;
       height: 245px;
+			overflow: hidden;
     }
+		.leftinner {
+			height: 245px;
+		}
+		.leftbelow:hover .rolcaption {
+			-webkit-transform: translateY(-72px);
+		}
     .right {
       height: 505px;
       margin-bottom: 25px;
+			overflow: hidden;
+			transition: 600ms;
     }
+		.right:hover .rolcaption {
+			-webkit-transform: translateY(-94px);
+		}
+		.rolcaption {
+			height: 70px;
+			width: 100%;
+			background-color: rgba(152, 160, 173, 0.3);
+			transition: 600ms;
+		}
     </style>
 </head>
 <body>
@@ -47,24 +69,37 @@
     </div>
     <div class="row">
       <div class="col-md-6 right">
-        <div class="right border">
+        <div class="border right">
           this is rihgt
         </div>
+				<div class="col-md-6 rolcaption">
+					<h1>Awwwwards</h1>
+				</div>
       </div>
       <div class="col-md-6">
         <!--div class="col-md-12 border leftupper">
           this is first left sidebar
         </div-->
 
-          <div class="col-md-5 col-xs-5 border leftupper">
-            left up 1
+          <div class="col-md-5 col-xs-5 leftupper">
+            Here will be our logo
           </div>
-          <div class="col-md-6 col-md-offset-1 col-xs-6 col-xs-offset-1 border leftupper">
-            left up 2
-          </div>
+          <div class="col-md-6 col-md-offset-1 col-xs-6 col-xs-offset-1 leftupper">
+						<div class="border leftupper">
+            	left up 2
+						</div>
+						<div class="rolcaption">
+							this is cpa
+						</div>
+					</div>
 
-        <div class="col-md-12 col-xs-12 border leftbelow">
-          second sidebar
+        <div class="col-md-12 col-xs-12 leftbelow">
+					<div class="border leftinner">
+	          second sidebar
+	        </div>
+					<div class="rolcaption">
+						This is another caption
+					</div>
         </div>
       </div>
     </div>
