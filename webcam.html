@@ -1,5 +1,24 @@
+<!doctype html>
 <html>
+<head>
+	<title>Image Capturing</title>
+	<meta charset='utf-8'>
+	<script src= "https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	<script src="js/cam.js"></script>
+
+</head>
 <body>
-Streaming testing using https in chrome
-</body>
+<div class="contentarea">
+  <div class="camera">
+    <video id="video">Video stream not available.</video>
+    <button id="startbutton">Take photo</button> 
+  </div>
+  <canvas id="canvas">
+  </canvas>
+  <!-- this video need to be enlarged -->
+  <div class="output">
+    <img id="photo" alt="The screen capture will appear in this box."> 
+  </div>
+</div>
 </html>
