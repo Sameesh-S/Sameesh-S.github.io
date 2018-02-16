@@ -10,13 +10,10 @@
 <body>
   <script>
     var data = [
-      {name: 'cats', count: 3, percentage: 2, color: '#000000'},
-      {name: 'dogs', count: 10, percentage: 8, color: '#f8b70a'},
-      {name: 'horses', count: 17, percentage: 15, color: '#6149c6'},
-      {name: 'goats', count: 47, percentage: 41, color: '#9f8170'},
-      {name: 'cows', count: 35, percentage: 31, color: '#8ABD4A'},
+      {name: 'cats', count: 3, percentage: 80, color: '#5c98f9'},
+      {name: 'dogs', count: 10, percentage: 20, color: '#c2d7f9'},
     ];
-    var totalCount = 112;		//calcuting total manually
+    var totalCount = 254;		//calcuting total manually
     
     var width = 540,
     height = 540,
@@ -24,7 +21,7 @@
 
 		var arc = d3.arc()
     	.outerRadius(radius - 10)
-    	.innerRadius(150);
+    	.innerRadius(170);
 
 		var pie = d3.pie()
 	    .sort(null)
