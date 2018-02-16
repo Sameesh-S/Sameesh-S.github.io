@@ -7,13 +7,13 @@
   </style>
 </head>
 
-<body bgcolor="#E6E6FA">
+<body bgcolor='#e5feff'>
   <script>
     var data = [
       {name: 'cats', count: 3, percentage: 80, color: '#5c98f9'},
       {name: 'dogs', count: 10, percentage: 20, color: '#c2d7f9'},
     ];
-    var totalCount = 254;		//calcuting total manually
+    var totalCount = 143;		//calcuting total manually
     
     var width = 540,
     height = 540,
@@ -32,6 +32,7 @@
 		var svg = d3.select('body').append("svg")
 	    .attr("width", width)
 	    .attr("height", height)
+	    .attr("opacity". "0.25")
 	    .append("g")
 	    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
