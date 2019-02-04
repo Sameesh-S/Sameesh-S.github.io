@@ -3,7 +3,22 @@ function startRecording(){
 }
 
 function startStreaming(){
-    console.log("start streaming");
+    const videoPreview = document.getElementById("videoPreview");
+    //get the video device :: 
+    let e = document.getElementById("videoDevices");
+    let videoConstraints = {};
+        videoConstraints.deviceId = e.options[e.selectedIndex].value;
+    let constraints = {
+        video: videoConstraints,
+        audio: false
+    };
+
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+            videoPreview.srcObject = stream;
+        }, (err) => {
+            console.log("user rejected permission");
+        })
 }
 
 function populateDropDown(dropDown, devices){
@@ -16,7 +31,6 @@ function populateDropDown(dropDown, devices){
 }
 
 function checkforDevices(){
-    console.log("inside check devices");
     //enumarate through devices and set it on dropdowns::
     let camaras = [];
     let audios = [];
