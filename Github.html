@@ -1,45 +1,147 @@
-<html>
-<head>
-	    <meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <script src="jquery-1.12.0.min.js"></script>
-	    <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="mycss/full.css">
-			<link rel="stylesheet" href="css/font-awesome.min.css">
-	    <script src="js/bootstrap.min.js"></script>
-        <script src="myjs/my.js"></script>
-    <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
-    <!--script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script-->
+package com.solutions;
 
-    <title>Background Image full size</title>
-</head>
-<body>
-  <div class="promo">
-    <video autoplay="autoplay">
-      <source src="videos/muffins.mp4" type="video/mp4">
-    </video>
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
-<div class="container">
 
-    <div class="col-xs-4 box">
-      hhhhhhhhhhh
-    </div>
-    <div class="col-xs-7 box">
-      hhhhhhhhhhh
-    </div>
-    <div class="col-xs-6 box">
-      hhhhhhhhhhh
-    </div>
-    <div class="col-xs-5 box">
-      hhhhhhhhhhh
-    </div>
-    <div class="col-xs-5 box">
-      hhhhhhhhhhh
-    </div>
-    <div class="col-xs-6 box">
-      <h1 class="rotate">hhhhhhhhhhh</h1>
-    </div>
-</div>
-  </div>
-</body>
+public class Sol {
+	
+	public static void main(String[] arg) {
+		try {
+		System.out.println(getQuery("http://103.231.8.28/adhaar/verification"));
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
+
+	public static String recevieResponse(InputStream is) throws IOException {
+	    String ss = "no";
+		try {
+	      int ch;
+	      StringBuffer sb = new StringBuffer();
+	      while ((ch = is.read()) != -1) {
+	        sb.append((char) ch);
+	      }
+	      return sb.toString();
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    } finally {
+	      if (is != null) {
+	        is.close();
+	      }
+	    }
+		return ss;
+	}
+	
+	
+	private static String getQuery(String urlString) throws IOException
+	{
+		URL url = new URL(urlString);
+		HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+		httpCon.setDoOutput(true);
+		httpCon.setRequestMethod("POST");
+        httpCon.setRequestProperty("Content-Type", "application/json");
+
+		OutputStream os = httpCon.getOutputStream();
+		OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+		HashMap<String, String> authBio = new HashMap<String, String>();
+		authBio.put("Pid", "kkkkk");
+		
+        String input = "{ \"Pid\": \"WL\", \"SKey\": \"val\" }";
+		osw.write(input);
+		osw.flush();
+		osw.close();
+		os.close();  //don't forget to close the OutputStream
+		httpCon.connect();
+
+		//read the inputstream and print it
+		String result;
+		BufferedInputStream bis = new BufferedInputStream(httpCon.getInputStream());
+		ByteArrayOutputStream buf = new ByteArrayOutputStream();
+		int result2 = bis.read();
+		while(result2 != -1) {
+		    buf.write((byte) result2);
+		    result2 = bis.read();
+		}
+		result = buf.toString();
+		System.out.println(result);
+		return result;
+	}
+	
+	
+	
+	public static String postStatus(String urlString) throws IOException {
+		 
+		String result = "";
+		int code = 200;
+		try {
+			String urlParameters  = "param1=a&param2=b&param3=c";
+			byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+			int    postDataLength = postData.length;
+			URL    url            = new URL(urlString);
+			HttpURLConnection conn= (HttpURLConnection) url.openConnection();           
+			conn.setDoOutput( true );
+			conn.setInstanceFollowRedirects( false );
+			conn.setRequestMethod( "POST" );
+			conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
+			conn.setRequestProperty( "charset", "utf-8");
+			conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+			conn.setUseCaches( false );
+			try( DataOutputStream wr = new DataOutputStream( conn.getOutputStream())) {
+			   wr.write( postData );
+			}
+ 
+			code = conn.getResponseCode();
+			if (code == 200) {
+				result = "-> Green <-\t" + "Code: " + code;
+				System.out.println(recevieResponse(conn.getInputStream()));
+			} else {
+				result = "-> Yellow <-\t" + "Code: " + code;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "-> Red <-\t" + "Wrong domain - Exception: " + e.getMessage();
+ 
+		}
+		System.out.println(urlString + "\t\tStatus:" + result);
+		return result;
+	}
+	
+	public static String getStatus(String url) throws IOException {
+		 
+		String result = "";
+		int code = 200;
+		try {
+			URL siteURL = new URL(url);
+			HttpURLConnection connection = (HttpURLConnection) siteURL.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setConnectTimeout(3000);
+			connection.connect();
+ 
+			code = connection.getResponseCode();
+			if (code == 200) {
+				result = "-> Green <-\t" + "Code: " + code;
+				System.out.println(recevieResponse(connection.getInputStream()));
+			} else {
+				result = "-> Yellow <-\t" + "Code: " + code;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "-> Red <-\t" + "Wrong domain - Exception: " + e.getMessage();
+ 
+		}
+		System.out.println(url + "\t\tStatus:" + result);
+		return result;
+	}
+}
