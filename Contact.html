@@ -108,16 +108,41 @@ public class KMP
         out[2] = oldDiff;
         return out;
     }
+    
+    public static String fetchString(int preStart, int preEnd, int postStart, int postEnd, String text) {
+    	if(preStart < postStart) {
+    		if(preEnd > postEnd) {
+    			return text.substring(preStart, preEnd);
+    		}else {
+    			return text.substring(preStart, postEnd);
+    		}
+    	} else {
+    		String first =  text.substring(postStart, postEnd);
+    		String sec = text.substring(preStart, preEnd);
+    		if(first.compareTo(sec) > 0 ) {
+    			return sec;
+    		} else {
+    			return first;
+    		}
+    	}
+    }
+    
     /** Main Function **/
     public static void main(String[] args) throws IOException
     {    
     	
-    	String text = "nothing";
-    	String prefix = "bruno";
-    	String postfix = "ingenious";
+		/*
+		 * String text = "nothing"; String prefix = "bruno"; String postfix =
+		 * "ingenious";
+		 */
+    	
+    	
+    	String text = "ab";
+    	String prefix = "b";
+    	String postfix = "a";
     	
        int[] pos = postfix(text, postfix);   
-       System.out.println(text.substring(pos[0], pos[1]));
+       //System.out.println(text.substring(pos[0], pos[1]));
        
        //for prefix set both of them reverse
        StringBuilder sb = new StringBuilder(text);
@@ -125,7 +150,10 @@ public class KMP
        String prech = new StringBuilder(prefix).reverse().toString();
        int[] preOut = postfix(pre, prech);
        int len = text.length();
-       System.out.println("first : " + (len -preOut[1])+", "+ (len -preOut[0]));
-       System.out.println(text.substring(len -preOut[1], len- preOut[0]));
+       //System.out.println("first : " + (len -preOut[1])+", "+ (len -preOut[0]));
+       //System.out.println(text.substring(len -preOut[1], len- preOut[0]));
+       
+       String out = fetchString(len - preOut[1], len-preOut[0], pos[0], pos[1], text);
+       System.out.println(out);
     }
 }
