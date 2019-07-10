@@ -3,7 +3,6 @@
  **/
  
 import java.io.IOException;
-import java.util.Arrays;
  
 /** Class KnuthMorrisPratt **/
 public class KMP
@@ -15,33 +14,9 @@ public class KMP
         /** pre construct failure array for a pattern **/
         int[] failure = new int[pat.length()];
         failure = fail(pat, failure);
-        System. out. println(Arrays. toString(failure));
         /** find match **/
         return posMatch(text, pat, failure);
-		/*
-		 * if (pos == -1) System.out.println("\nNo match found"); else
-		 * System.out.println("\nMatch found at index "+ pos);
-		 */
     }
-    
-    //raven
-    private int[] failRe(String pat, int[] failure) {
-    	int n = pat.length();
-    	int[] failureR = new int[pat.length()];
-        failureR[pat.length() -1 ] = -1;
-        int j = pat.length() -2;
-        for(; j> -1; j--) {
-        	int i = failureR[j+1];
-            while ((pat.charAt(j) != pat.charAt(i - 1)) && i <= pat.length() -1)
-                i = failure[i];
-            if (pat.charAt(j) == pat.charAt(i - 1))
-                failure[j] = i - 1;
-            else
-                failure[j] = -1;
-        }
-        return failure;
-    }
-    
     /** Failure function for a pattern **/
     private static int[] fail(String pat, int[] failure)
     {
@@ -114,15 +89,11 @@ public class KMP
         		}
         	j =0;
             }
-            
-            
-            
         }
         
         	if(matchStart != -1) {
         		matchEnd = i;
         		newDiff = matchEnd - matchStart;
-        		System.out.println("new diff: " + newDiff);
         		if(newDiff >= oldDiff) {
         			matchStartOld = matchStart;
         			matchEndOld = matchEnd;
@@ -131,10 +102,6 @@ public class KMP
 
         	
         }
-        
-        
-        
-        //matchEnd = ((j == lenp) ? (i - lenp) : -1);
         System.out.println("start : " + matchStartOld + ", end "+ matchEndOld);
         out[0] = matchStartOld;
         out[1] = matchEndOld;
@@ -144,9 +111,21 @@ public class KMP
     /** Main Function **/
     public static void main(String[] args) throws IOException
     {    
-       String str = "engineginskosqginksoes";
-       int[] pos = postfix(str, "ginkos");   
-       System.out.println(str.substring(pos[0], pos[1]));
+    	
+    	String text = "nothing";
+    	String prefix = "bruno";
+    	String postfix = "ingenious";
+    	
+       int[] pos = postfix(text, postfix);   
+       System.out.println(text.substring(pos[0], pos[1]));
        
+       //for prefix set both of them reverse
+       StringBuilder sb = new StringBuilder(text);
+       String pre = sb.reverse().toString();
+       String prech = new StringBuilder(prefix).reverse().toString();
+       int[] preOut = postfix(pre, prech);
+       int len = text.length();
+       System.out.println("first : " + (len -preOut[1])+", "+ (len -preOut[0]));
+       System.out.println(text.substring(len -preOut[1], len- preOut[0]));
     }
 }
