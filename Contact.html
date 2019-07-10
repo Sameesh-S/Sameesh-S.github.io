@@ -10,21 +10,40 @@ public class KMP
 {
     /** Failure array **/
     /** Constructor **/
-    public KMP(String text, String pat)
+    public static int[] postfix(String text, String pat)
     {
         /** pre construct failure array for a pattern **/
         int[] failure = new int[pat.length()];
         failure = fail(pat, failure);
         System. out. println(Arrays. toString(failure));
         /** find match **/
-        int pos = posMatch(text, pat, failure);
-        if (pos == -1)
-            System.out.println("\nNo match found");
-        else
-            System.out.println("\nMatch found at index "+ pos);
+        return posMatch(text, pat, failure);
+		/*
+		 * if (pos == -1) System.out.println("\nNo match found"); else
+		 * System.out.println("\nMatch found at index "+ pos);
+		 */
     }
+    
+    //raven
+    private int[] failRe(String pat, int[] failure) {
+    	int n = pat.length();
+    	int[] failureR = new int[pat.length()];
+        failureR[pat.length() -1 ] = -1;
+        int j = pat.length() -2;
+        for(; j> -1; j--) {
+        	int i = failureR[j+1];
+            while ((pat.charAt(j) != pat.charAt(i - 1)) && i <= pat.length() -1)
+                i = failure[i];
+            if (pat.charAt(j) == pat.charAt(i - 1))
+                failure[j] = i - 1;
+            else
+                failure[j] = -1;
+        }
+        return failure;
+    }
+    
     /** Failure function for a pattern **/
-    private int[] fail(String pat, int[] failure)
+    private static int[] fail(String pat, int[] failure)
     {
         int n = pat.length();
         failure[0] = -1;
@@ -41,8 +60,12 @@ public class KMP
         return failure;
     }
     /** Function to find match for a pattern **/
-    private int posMatch(String text, String pat, int[] failure)
+    private static int[] posMatch(String text, String pat, int[] failure)
     {
+    	
+    	int[] out = new int[3];
+    	
+    	
         int i = 0, j = 0;
         int matchStart = -1; 
         int matchEnd = -1;
@@ -66,8 +89,7 @@ public class KMP
             	if(matchStart != -1) {
             		matchEnd = i;
             		newDiff = matchEnd - matchStart;
-            		System.out.println("new diff: " + newDiff);
-            		if(newDiff > oldDiff) {
+            		if(newDiff >= oldDiff) {
             			matchStartOld = matchStart;
             			matchEndOld = matchEnd;
             			oldDiff = newDiff;
@@ -81,42 +103,50 @@ public class KMP
             	else
             		j = failure[j - 1] + 1;
             }
+            if((j== lenp)) {
+            	matchEnd = i;
+        		newDiff = matchEnd - matchStart;
+        		if(newDiff > oldDiff) {
+        			matchStartOld = matchStart;
+        			matchEndOld = matchEnd;
+        			oldDiff = newDiff;
+        			//System.out.println("start : " + matchStart + ", end "+ i);
+        		}
+        	j =0;
+            }
+            
+            
+            
         }
         
-        if((j== lenp)) {
-        	matchEnd = i;
-    		newDiff = matchEnd - matchStart;
-    		if(newDiff > oldDiff) {
-    			matchStartOld = matchStart;
-    			matchEndOld = matchEnd;
-    			oldDiff = newDiff;
-    			System.out.println("start : " + matchStart + ", end "+ i);
-    		}
-        } else {
         	if(matchStart != -1) {
         		matchEnd = i;
         		newDiff = matchEnd - matchStart;
         		System.out.println("new diff: " + newDiff);
-        		if(newDiff > oldDiff) {
+        		if(newDiff >= oldDiff) {
         			matchStartOld = matchStart;
         			matchEndOld = matchEnd;
         			oldDiff = newDiff;
         		}
 
-        	}
+        	
         }
         
         
         
         //matchEnd = ((j == lenp) ? (i - lenp) : -1);
         System.out.println("start : " + matchStartOld + ", end "+ matchEndOld);
-
-        return matchEnd;
+        out[0] = matchStartOld;
+        out[1] = matchEndOld;
+        out[2] = oldDiff;
+        return out;
     }
     /** Main Function **/
     public static void main(String[] args) throws IOException
     {    
-
-       KMP kmp = new KMP("engineginkoq", "ginkos");        
+       String str = "engineginskosqginksoes";
+       int[] pos = postfix(str, "ginkos");   
+       System.out.println(str.substring(pos[0], pos[1]));
+       
     }
 }
