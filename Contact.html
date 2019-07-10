@@ -48,6 +48,8 @@ public class KMP
         int matchEnd = -1;
         int matchStartOld = -1;
         int matchEndOld = -1;
+        int oldDiff = -1;
+        int newDiff = -1;
         int lens = text.length();
         int lenp = pat.length();
         while (i < lens && j < lenp)
@@ -63,6 +65,13 @@ public class KMP
             	//not the ending index ::
             	if(matchStart != -1) {
             		matchEnd = i;
+            		newDiff = matchEnd - matchStart;
+            		if(newDiff > oldDiff) {
+            			matchStartOld = matchStart;
+            			matchEndOld = matchEnd;
+            			System.out.println("start : " + matchStart + ", end "+ i);
+            		}
+
             	}
             	matchStart = -1;
             	if (j == 0)
@@ -71,8 +80,20 @@ public class KMP
             		j = failure[j - 1] + 1;
             }
         }
-        matchEnd = ((j == lenp) ? (i - lenp) : -1);
-        System.out.println("start : " + matchStart + ", end "+ i);
+        
+        if((j== lenp)) {
+        	matchEnd = i;
+    		newDiff = matchEnd - matchStart;
+    		if(newDiff > oldDiff) {
+    			matchStartOld = matchStart;
+    			matchEndOld = matchEnd;
+    			System.out.println("start : " + matchStart + ", end "+ i);
+    		}
+        }
+        
+        
+        //matchEnd = ((j == lenp) ? (i - lenp) : -1);
+        System.out.println("start : " + matchStartOld + ", end "+ matchEndOld);
 
         return matchEnd;
     }
@@ -80,6 +101,6 @@ public class KMP
     public static void main(String[] args) throws IOException
     {    
 
-        KMP kmp = new KMP("engine", "gin");        
+        KMP kmp = new KMP("enginegi", "ginko");        
     }
 }
