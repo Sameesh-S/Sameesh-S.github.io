@@ -1,83 +1,85 @@
-<html>
-<head>
-	    <meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <script src="jquery-1.12.0.min.js"></script>
-	    <link rel="stylesheet" href="css/bootstrap.min.css">
-			<!--google font-->
-			<link href='http://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
-			<style>
-			body {
-			    font-family: 'Bungee Shade';font-size: 22px;
-			}
-			</style>
+/**
+ ** Java Program to implement Knuth Morris Pratt Algorithm
+ **/
+ 
+import java.io.IOException;
+import java.util.Arrays;
+ 
+/** Class KnuthMorrisPratt **/
+public class KMP
+{
+    /** Failure array **/
+    /** Constructor **/
+    public KMP(String text, String pat)
+    {
+        /** pre construct failure array for a pattern **/
+        int[] failure = new int[pat.length()];
+        failure = fail(pat, failure);
+        System. out. println(Arrays. toString(failure));
+        /** find match **/
+        int pos = posMatch(text, pat, failure);
+        if (pos == -1)
+            System.out.println("\nNo match found");
+        else
+            System.out.println("\nMatch found at index "+ pos);
+    }
+    /** Failure function for a pattern **/
+    private int[] fail(String pat, int[] failure)
+    {
+        int n = pat.length();
+        failure[0] = -1;
+        for (int j = 1; j < n; j++)
+        {
+            int i = failure[j - 1];
+            while ((pat.charAt(j) != pat.charAt(i + 1)) && i >= 0)
+                i = failure[i];
+            if (pat.charAt(j) == pat.charAt(i + 1))
+                failure[j] = i + 1;
+            else
+                failure[j] = -1;
+        }
+        return failure;
+    }
+    /** Function to find match for a pattern **/
+    private int posMatch(String text, String pat, int[] failure)
+    {
+        int i = 0, j = 0;
+        int matchStart = -1; 
+        int matchEnd = -1;
+        int matchStartOld = -1;
+        int matchEndOld = -1;
+        int lens = text.length();
+        int lenp = pat.length();
+        while (i < lens && j < lenp)
+        {
+            if (text.charAt(i) == pat.charAt(j))
+            {
+            	if(matchStart == -1) {
+            		matchStart = i;
+            	}
+                i++;
+                j++;
+            } else {
+            	//not the ending index ::
+            	if(matchStart != -1) {
+            		matchEnd = i;
+            	}
+            	matchStart = -1;
+            	if (j == 0)
+            		i++;
+            	else
+            		j = failure[j - 1] + 1;
+            }
+        }
+        matchEnd = ((j == lenp) ? (i - lenp) : -1);
+        System.out.println("start : " + matchStart + ", end "+ i);
 
-      <link rel="stylesheet" href="mycss/screen.css">
-      <link rel="stylesheet" href="mycss/contact.css">
-			<link rel="stylesheet" href="css/font-awesome.min.css">
-	    <script src="js/bootstrap.min.js"></script>
-        <script src="myjs/my.js"></script>
+        return matchEnd;
+    }
+    /** Main Function **/
+    public static void main(String[] args) throws IOException
+    {    
 
-
-    <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
-    <!--script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script-->
-</head>
-<body>
-  <!--static navbar-->
-  <nav class="navbar navbar-default navbar-inner navbar-fixed-top">
-  	<div class="container-fluid">
-  		<div class="navbar-header">
-  			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-  				<span class="sr-only">Toggle navigation</span>
-  				<span class="icon-bar"></span>
-  				<span class="icon-bar"></span>
-  				<span class="icon-bar"></span>
-  			</button>
-  			<a class="navbar-brand" href="#">Project name</a>
-  		</div>
-  		<div id="navbar" class="navbar-collapse collapse">
-  			<ul class="nav navbar-nav">
-  				<li class="active"><a href="#">Home</a></li>
-  				<li><a href="#">About</a></li>
-  				<li><a href="#">Contact</a></li>
-  				<li class="dropdown">
-  					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-  					<ul class="dropdown-menu">
-  						<li><a href="#">Action</a></li>
-  						<li><a href="#">Another action</a></li>
-  						<li><a href="#">Something else here</a></li>
-  						<li role="separator" class="divider"></li>
-  						<li class="dropdown-header">Nav header</li>
-  						<li><a href="#">Separated link</a></li>
-  						<li><a href="#">One more separated link</a></li>
-  					</ul>
-  				</li>
-  			</ul>
-  			<ul class="nav navbar-nav navbar-right">
-  				<li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-  				<li><a href="../navbar-static-top/">Static top</a></li>
-  				<li><a href="../navbar-fixed-top/">Fixed top</a></li>
-  			</ul>
-  		</div><!--/.nav-collapse -->
-  	</div><!--/.container-fluid -->
-  </nav>
-
-
-<div class="container">
-  <input type="file" accept="image/*" capture>
-	<div class="row">
-    <div class="contact-bord col-md-1">
-      <h1 class="vertical">CONTACT</h1>
-    </div>
-    <div class="contact-bord col-md-6">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15709.568519805916!2d76.2261476!3d10.1487459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x50f6f58c0d6de0ed!2sUniversal+Mobiles+(North+Paravoor)!5e0!3m2!1sen!2sin!4v1482856588772" width="580" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-    <div class="contact-bord col-md-5">
-      <h1 class="sofia">Address</h1>
-      <p>North paravoor</p>
-    </div>
-  </div>
-</div>
-
-</body>
+        KMP kmp = new KMP("engine", "gin");        
+    }
+}
